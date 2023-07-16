@@ -5,7 +5,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <Title>Moralis.Net</Title>
-    <Version>0.0.1</Version>
+    <Version>1.0.0</Version>
     <Authors>Mehmet Emin KARADAĞ</Authors>
     <Description>Web3 geliştirmeyi en az Web2 kadar kolay hale getiren platformlardan biri olan Moralis'in .NET geliştiricileri için hazırlanmış kütüphanesidir.</Description>
     <Copyright>Tüm hakları saklıdır.</Copyright>
@@ -13,26 +13,24 @@
     <RepositoryUrl>https://github.com/emin-karadag/Moralis.Net</RepositoryUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageTags>moralis,web3,blockchain,nft,web 3,ethereum,binance,polygon,solona,avalanche,fantom,cronos,arbitrum,palm,testnet,aptos,web3 api</PackageTags>
-    <PackageReleaseNotes>Moralis.Net projesi oluşturuldu.</PackageReleaseNotes>
+    <PackageReleaseNotes>Moralis API EVM Chain kapsamında;
+
+-&gt; NFT API
+-&gt; Wallet API
+-&gt; Token API
+-&gt; Balance API
+-&gt; Transaction Api
+
+entegrasyonları yapıldı.</PackageReleaseNotes>
     <PackageIcon>Moralis-Logo.png</PackageIcon>
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Business\" />
-    <Folder Include="Core\" />
     <Folder Include="Entity\" />
-    <Folder Include="Models\" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="..\..\README.md">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="Moralis-Logo.png">
+    <None Include="..\README.md">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
