@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 using System.Reflection;
 
 namespace Moralis.Net.Core.Utilities
@@ -17,6 +18,12 @@ namespace Moralis.Net.Core.Utilities
                 }
             }
             return enumValue.ToString();
+        }
+
+        public static string FormatDateTime(this DateTime dateTime, string format)
+        {
+            var formattedDateTime = dateTime.ToString(format, CultureInfo.InvariantCulture);
+            return formattedDateTime;
         }
     }
 }

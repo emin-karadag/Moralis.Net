@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace Moralis.Net.Core.Converters
 {
-    public class StringBigIntegerConvertor : JsonConverter<BigInteger>
+    public class StringToBigIntegerConvertor : JsonConverter<BigInteger>
     {
         public override BigInteger Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
