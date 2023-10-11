@@ -10,7 +10,7 @@ Moralis'in herkese açık [API dokümanı](https://docs.moralis.io/) referans al
     MIT License
 
 ## Özellikleri
-- NuGet aracılığıyla yükleyebilme. ([Moralis.Net](https://www.nuget.org/packages/Moralis.Net/1.0.0))
+- NuGet aracılığıyla yükleyebilme. ([Moralis.Net](https://www.nuget.org/packages/Moralis.Net/1.0.3))
 - .NET 7 desteği. (Linux/MacOS uyumluluğu)
 - RestAPI, [Moralis resmi dokümanının](https://docs.moralis.io/) büyük çoğunluğunu destekler.
 	- Aktif olarak yeni özellikler eklenmeye devam edilecek.
@@ -20,16 +20,16 @@ API uç noktalarını kullanabilmek için Moralis hesabı oluşturmanız gerekme
 > Eğer hesabınız yok ise [buraya tıklayarak](https://admin.moralis.io/register) Moralis'e kaydolabilirsiniz.
 
 ## Kurulum
-Bu kütüphane NuGet'te mevcuttur, indirmek için çekinmeyin. ([https://www.nuget.org/packages/Moralis.Net/1.0.0](https://www.nuget.org/packages/Moralis.Net/1.0.0 "[https://www.nuget.org/packages/BybitApi/1.0.0](https://www.nuget.org/packages/Moralis.Net/1.0.0)"))
+Bu kütüphane NuGet'te mevcuttur, indirmek için çekinmeyin. ([https://www.nuget.org/packages/Moralis.Net/1.0.3](https://www.nuget.org/packages/Moralis.Net/1.0.3 "[https://www.nuget.org/packages/Moralis.Net/1.0.3](https://www.nuget.org/packages/Moralis.Net/1.0.0)"))
 
 **NuGet PM**
 ```
-Install-Package Moralis.Net -Version 1.0.0
+Install-Package Moralis.Net -Version 1.0.3
 ```
 
 **dotnet cli**
 ```
-dotnet add package Moralis.Net --version 1.0.0
+dotnet add package Moralis.Net --version 1.0.3
 ```
 <!--
 ## Yol Haritası
