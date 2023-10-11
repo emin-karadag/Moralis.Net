@@ -59,10 +59,10 @@ namespace Moralis.Net.Models.Web3.EvmChain.NftApi
         public string Metadata { get; set; } = "";
 
         [JsonPropertyName("last_token_uri_sync")]
-        public DateTimeOffset LastTokenUriSync { get; set; }
+        public DateTimeOffset? LastTokenUriSync { get; set; }
 
         [JsonPropertyName("last_metadata_sync")]
-        public DateTimeOffset LastMetadataSync { get; set; }
+        public DateTimeOffset? LastMetadataSync { get; set; }
 
         [JsonPropertyName("minter_address")]
         public string MinterAddress { get; set; } = "";
@@ -72,5 +72,8 @@ namespace Moralis.Net.Models.Web3.EvmChain.NftApi
 
         [JsonPropertyName("verified_collection")]
         public bool VerifiedCollection { get; set; }
+
+        [JsonPropertyName("updated_at")]
+        public object? UpdatedAt { get; set; }
     }
 }
