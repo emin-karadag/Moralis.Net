@@ -9,7 +9,7 @@ namespace Moralis.Net.Business.Concrete.Web3.Chains.EvmChain
 {
     public class NftApi : INftApi
     {
-        public async Task<IDataResult<WalletNftModel?>> GetNftsByWalletAsync(string apiKey, string address, EvmChainEnum chain = EvmChainEnum.ETHEREUM, List<string>? tokenAddresses = null, FormatEnum format = FormatEnum.DECIMAL, int? limit = null, string? cursor = null, bool? normalizeMetadata = null, bool? mediaItems = null, CancellationToken ct = default)
+        public async Task<IDataResult<WalletNftModel?>> GetNftsByWalletAsync(string apiKey, string address, EvmChainEnum chain = EvmChainEnum.ETHEREUM, List<string>? tokenAddresses = null, int? limit = null, string? cursor = null, FormatEnum format = FormatEnum.DECIMAL, bool? normalizeMetadata = null, bool? mediaItems = null, bool? excludeSpam = null, CancellationToken ct = default)
         {
             try
             {
@@ -31,6 +31,8 @@ namespace Moralis.Net.Business.Concrete.Web3.Chains.EvmChain
                 if (mediaItems.HasValue)
                     queryStr += $"&media_items={mediaItems}";
 
+                if (excludeSpam.HasValue)
+                    queryStr += $"&exclude_spam={excludeSpam}";
 
                 var result = await RequestHelper.SendRequestAsync<WalletNftModel?>($"/{address}/nft?{queryStr}", apiKey, null, ct: ct);
                 return result;
@@ -78,7 +80,7 @@ namespace Moralis.Net.Business.Concrete.Web3.Chains.EvmChain
             }
         }
 
-        public async Task<IDataResult<WalletNftCollectionsModel?>> GetNftCollectionsByWalletAsync(string apiKey, string address, EvmChainEnum chain = EvmChainEnum.ETHEREUM, int? limit = null, string? cursor = null, CancellationToken ct = default)
+        public async Task<IDataResult<WalletNftCollectionsModel?>> GetNftCollectionsByWalletAsync(string apiKey, string address, EvmChainEnum chain = EvmChainEnum.ETHEREUM, int? limit = null, string? cursor = null, bool? excludeSpam = null, CancellationToken ct = default)
         {
             try
             {
@@ -93,12 +95,36 @@ namespace Moralis.Net.Business.Concrete.Web3.Chains.EvmChain
                 if (!string.IsNullOrEmpty(cursor))
                     parameters.Add("cursor", cursor.ToString());
 
+                if (excludeSpam.HasValue)
+                    parameters.Add("exclude_spam", excludeSpam.Value.ToString());
+
                 var result = await RequestHelper.SendRequestAsync<WalletNftCollectionsModel?>($"/{address}/nft/collections", apiKey, parameters, ct: ct);
                 return result;
             }
             catch (Exception ex)
             {
                 return new ErrorDataResult<WalletNftCollectionsModel>(ex.Message);
+            }
+        }
+
+        public async Task<IDataResult<ResyncNftMetadataModel?>> ResyncNftMetadataAsync(string apiKey, string address, string tokenId, EvmChainEnum chain = EvmChainEnum.ETHEREUM, FlagEnum flag = FlagEnum.NONE, ModeEnum mode = ModeEnum.NONE, CancellationToken ct = default)
+        {
+            try
+            {
+                var queryStr = $"chain={chain.GetDisplayName()}";
+
+                if (flag != FlagEnum.NONE)
+                    queryStr += $"&flag={flag.GetDisplayName()}";
+
+                if (mode != ModeEnum.NONE)
+                    queryStr += $"&mode={mode.GetDisplayName()}";
+
+                var result = await RequestHelper.SendRequestAsync<ResyncNftMetadataModel?>($"/nft/{address}/{tokenId}/metadata/resync?{queryStr}", apiKey, null, ct: ct);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                return new ErrorDataResult<ResyncNftMetadataModel?>(ex.Message);
             }
         }
     }

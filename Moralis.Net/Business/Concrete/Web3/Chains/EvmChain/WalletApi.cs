@@ -13,7 +13,7 @@ namespace Moralis.Net.Business.Concrete.Web3.Chains.EvmChain
         {
             try
             {
-                chains ??= new List<EvmChainEnum> { EvmChainEnum.ETHEREUM };
+                chains ??= [EvmChainEnum.ETHEREUM];
                 var chainStr = string.Join("&chains=", chains.Select(chain => chain.GetDisplayName()));
                 var result = await RequestHelper.SendRequestAsync<ChainActivityModel?>($"/wallets/{address}/chains?chains={chainStr}", apiKey, null, ct: ct);
                 return result;

@@ -4,7 +4,7 @@ namespace Moralis.Net.Core.Utilities
 {
     public class MoralisHelper
     {
-        const string VERSION = "v2";
+        const string VERSION = "v2.2";
         const string BASE_URL = "https://deep-index.moralis.io/api/";
 
         internal static Uri GetBaseUrl()
