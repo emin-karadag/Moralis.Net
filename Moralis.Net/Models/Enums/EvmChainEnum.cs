@@ -54,5 +54,23 @@ namespace Moralis.Net.Models.Enums
 
         //[Display(Name = "")]
         //OPTIMISM
+
+        [Display(Name = "0x64")]
+        GNOSIS,
+
+        [Display(Name = "0x27d8")]
+        GNOSIS_TESTNET,
+
+        [Display(Name = "0x15b38")]
+        CHILIZ,
+
+        [Display(Name = "0x15b32")]
+        CHILIZ_TESTNET,
+
+        [Display(Name = "0x2105")]
+        BASE,
+
+        [Display(Name = "0x14a33")]
+        BASE_TESTNET,
     }
 }
