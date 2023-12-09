@@ -21,6 +21,9 @@ namespace Moralis.Net.Models.Enums
         [Display(Name = "pancakeswapv2")]
         PANCAKESWAPV2,
 
+        [Display(Name = "pancakeswapv3")]
+        PANCAKESWAPV3,
+
         [Display(Name = "quickswap")]
         QUICKSWAP,
 
@@ -40,6 +43,12 @@ namespace Moralis.Net.Models.Enums
         VVS,
 
         [Display(Name = "camelotv2")]
-        CAMELOTV2
+        CAMELOTV2,
+
+        [Display(Name = "mm finance")]
+        MMFINANCE,
+
+        [Display(Name = "crodex")]
+        CRODEX
     }
 }
