@@ -127,5 +127,59 @@ namespace Moralis.Net.Business.Concrete.Web3.Chains.EvmChain
                 return new ErrorDataResult<ResyncNftMetadataModel?>(ex.Message);
             }
         }
+
+        public async Task<IDataResult<NftOwnersModel?>> GetNftOwnersByContractAsync(string apiKey, string address, EvmChainEnum chain = EvmChainEnum.ETHEREUM, int? limit = null, string? cursor = null, FormatEnum format = FormatEnum.DECIMAL, bool? normalizeMetadata = null, bool? mediaItems = null, CancellationToken ct = default)
+        {
+            try
+            {
+                var queryStr = $"chain={chain.GetDisplayName()}&format={format.GetDisplayName()}";
+
+                if (limit.HasValue)
+                    queryStr += $"&limit={limit.Value}";
+
+                if (!string.IsNullOrEmpty(cursor))
+                    queryStr += $"&cursor={cursor}";
+
+                if (normalizeMetadata.HasValue)
+                    queryStr += $"&normalizeMetadata={normalizeMetadata.Value}";
+
+                if (mediaItems.HasValue)
+                    queryStr += $"&media_items={mediaItems.Value}";
+
+                var result = await RequestHelper.SendRequestAsync<NftOwnersModel>($"/nft/{address}/owners?{queryStr}", apiKey, null, ct: ct);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                return new ErrorDataResult<NftOwnersModel?>(ex.Message);
+            }
+        }
+
+        public async Task<IDataResult<NftOwnersModel?>> GetNftOwnersByTokenIdAsync(string apiKey, string address, long tokenId, EvmChainEnum chain = EvmChainEnum.ETHEREUM, int? limit = null, string? cursor = null, FormatEnum format = FormatEnum.DECIMAL, bool? normalizeMetadata = null, bool? mediaItems = null, CancellationToken ct = default)
+        {
+            try
+            {
+                var queryStr = $"chain={chain.GetDisplayName()}&format={format.GetDisplayName()}";
+
+                if (limit.HasValue)
+                    queryStr += $"&limit={limit.Value}";
+
+                if (!string.IsNullOrEmpty(cursor))
+                    queryStr += $"&cursor={cursor}";
+
+                if (normalizeMetadata.HasValue)
+                    queryStr += $"&normalizeMetadata={normalizeMetadata.Value}";
+
+                if (mediaItems.HasValue)
+                    queryStr += $"&media_items={mediaItems.Value}";
+
+                var result = await RequestHelper.SendRequestAsync<NftOwnersModel>($"/nft/{address}/{tokenId}/owners?{queryStr}", apiKey, null, ct: ct);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                return new ErrorDataResult<NftOwnersModel?>(ex.Message);
+            }
+        }
     }
 }

@@ -65,5 +65,36 @@ namespace Moralis.Net.Business.Abstract.Web3.Chains.EvmChain
         /// <param name="ct"></param>
         /// <returns></returns>
         Task<IDataResult<ResyncNftMetadataModel?>> ResyncNftMetadataAsync(string apiKey, string address, string tokenId, EvmChainEnum chain = EvmChainEnum.ETHEREUM, FlagEnum flag = FlagEnum.NONE, ModeEnum mode = ModeEnum.NONE, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get owners of NFTs for a given contract.
+        /// </summary>
+        /// <param name="apiKey">Moralis API Key</param>
+        /// <param name="address">The address of the NFT contract</param>
+        /// <param name="chain">The chain to query</param>
+        /// <param name="limit">The desired page size of the result.</param>
+        /// <param name="cursor">The cursor returned in the previous response (used for getting the next page).</param>
+        /// <param name="format">The format of the token ID</param>
+        /// <param name="normalizeMetadata">Should normalized metadata be returned?</param>
+        /// <param name="mediaItems">Should preview media data be returned?</param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        Task<IDataResult<NftOwnersModel?>> GetNftOwnersByContractAsync(string apiKey, string address, EvmChainEnum chain = EvmChainEnum.ETHEREUM, int? limit = null, string? cursor = null, FormatEnum format = FormatEnum.DECIMAL, bool? normalizeMetadata = null, bool? mediaItems = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get owners of a specific NFT given the contract address and token ID.
+        /// </summary>
+        /// <param name="apiKey">Moralis API Key</param>
+        /// <param name="address">The address of the NFT contract</param>
+        /// <param name="tokenId">The ID of the token</param>
+        /// <param name="chain">The chain to query</param>
+        /// <param name="limit">The desired page size of the result.</param>
+        /// <param name="cursor">The cursor returned in the previous response (used for getting the next page).</param>
+        /// <param name="format">The format of the token ID</param>
+        /// <param name="normalizeMetadata">Should normalized metadata be returned?</param>
+        /// <param name="mediaItems">Should preview media data be returned?</param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        Task<IDataResult<NftOwnersModel?>> GetNftOwnersByTokenIdAsync(string apiKey, string address, long tokenId, EvmChainEnum chain = EvmChainEnum.ETHEREUM, int? limit = null, string? cursor = null, FormatEnum format = FormatEnum.DECIMAL, bool? normalizeMetadata = null, bool? mediaItems = null, CancellationToken ct = default);
     }
 }
