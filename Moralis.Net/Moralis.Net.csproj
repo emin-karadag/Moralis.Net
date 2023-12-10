@@ -5,7 +5,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <Title>Moralis.Net</Title>
-    <Version>1.0.4</Version>
+    <Version>1.0.5</Version>
     <Authors>Mehmet Emin KARADAĞ</Authors>
     <Description>Web3 geliştirmeyi en az Web2 kadar kolay hale getiren platformlardan biri olan Moralis'in .NET geliştiricileri için hazırlanmış kütüphanesidir.</Description>
     <Copyright>Tüm hakları saklıdır.</Copyright>
@@ -13,12 +13,8 @@
     <RepositoryUrl>https://github.com/emin-karadag/Moralis.Net</RepositoryUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageTags>moralis,web3,blockchain,nft,web 3,ethereum,binance,polygon,solona,avalanche,fantom,cronos,arbitrum,palm,testnet,aptos,web3 api</PackageTags>
-    <PackageReleaseNotes>- .NET 7'den .NET 8'e yükseltme yapıldı.
-- GNOSIS, GNOSIS_TESTNET, CHILIZ, CHILIZ_TESTNET, BASE, BASE_TESTNET blokzincirleri üzerinde sorgulama yapabilme desteği eklendi.
-- PANCAKESWAP V3, MM FINANCE ve CRODEX borsa desteği eklendi.
-- Moralis Api v2.2 yapıldı.
-- ResyncNftMetadataAsync() uç noktası eklendi.
-- Diğer bazı ek geliştirmeler yapıldı.</PackageReleaseNotes>
+    <PackageReleaseNotes>- GetNftOwnersByContractAsync() metodu eklendi.
+- GetNftOwnersByTokenIdAsync() metodu eklendi.</PackageReleaseNotes>
     <PackageIcon>Moralis-Logo.png</PackageIcon>
     <PackAsTool>False</PackAsTool>
   </PropertyGroup>
