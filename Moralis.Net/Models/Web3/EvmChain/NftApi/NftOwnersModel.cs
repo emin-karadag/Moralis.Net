@@ -40,7 +40,7 @@ namespace Moralis.Net.Models.Web3.EvmChain.NftApi
 
         [JsonPropertyName("block_number_minted")]
         [JsonConverter(typeof(StringToLongConvertor))]
-        public long BlockNumberMinted { get; set; }
+        public long? BlockNumberMinted { get; set; }
 
         [JsonPropertyName("block_number")]
         [JsonConverter(typeof(StringToLongConvertor))]
