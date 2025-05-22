@@ -5,7 +5,7 @@ VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Moralis.Net", "Moralis.Net\Moralis.Net.csproj", "{5D9BCC50-3B09-435A-A834-127D0005C994}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Moralis.Net.Test", "Moralis.Net.Test\Moralis.Net.Test.csproj", "{18BA352F-59F4-454B-83E4-E178E9DE11BB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Moralis.Net.Test", "Moralis.Net.Test\Moralis.Net.Test.csproj", "{F071B4FA-BD4E-430A-A617-55D74AE49FE0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{5D9BCC50-3B09-435A-A834-127D0005C994}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5D9BCC50-3B09-435A-A834-127D0005C994}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5D9BCC50-3B09-435A-A834-127D0005C994}.Release|Any CPU.Build.0 = Release|Any CPU
-		{18BA352F-59F4-454B-83E4-E178E9DE11BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{18BA352F-59F4-454B-83E4-E178E9DE11BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{18BA352F-59F4-454B-83E4-E178E9DE11BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{18BA352F-59F4-454B-83E4-E178E9DE11BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F071B4FA-BD4E-430A-A617-55D74AE49FE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F071B4FA-BD4E-430A-A617-55D74AE49FE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F071B4FA-BD4E-430A-A617-55D74AE49FE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F071B4FA-BD4E-430A-A617-55D74AE49FE0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
