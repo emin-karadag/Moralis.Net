@@ -49,11 +49,14 @@ namespace Moralis.Net.Models.Enums
         //[Display(Name = "")]
         //ARBITRUM_TESTNET,
 
-        //[Display(Name = "")]
-        //RONIN,
+        [Display(Name = "0x7e4")]
+        RONIN,
 
-        //[Display(Name = "")]
-        //OPTIMISM
+        [Display(Name = "0x31769")]
+        RONIN_TESTNET,
+
+        [Display(Name = "0xa")]
+        OPTIMISM,
 
         [Display(Name = "0x64")]
         GNOSIS,
@@ -72,5 +75,50 @@ namespace Moralis.Net.Models.Enums
 
         [Display(Name = "0x14a33")]
         BASE_TESTNET,
+
+        [Display(Name = "0x14a34")]
+        BASE_SEPOLIA,
+
+        [Display(Name = "0x13882")]
+        POLYGON_AMOY,
+
+        [Display(Name = "0xe708")]
+        LINEA,
+
+        [Display(Name = "0xe705")]
+        LINEA_SEPOLIA,
+
+        [Display(Name = "0x504")]
+        MOONBEAM,
+
+        [Display(Name = "0x505")]
+        MOONRIVER,
+
+        [Display(Name = "0x507")]
+        MOONBASE,
+
+        [Display(Name = "0x2eb")]
+        FLOW,
+
+        [Display(Name = "0x221")]
+        FLOW_TESTNET,
+
+        [Display(Name = "0x46f")]
+        LISK,
+
+        [Display(Name = "0x106a")]
+        LISK_SEPOLIA,
+
+        [Display(Name = "0x171")]
+        PULSE,
+
+        [Display(Name = "0x531")]
+        SEI,
+
+        [Display(Name = "0x530")]
+        SEI_TESTNET,
+
+        [Display(Name = "0x8f")]
+        MONAD,
     }
 }
