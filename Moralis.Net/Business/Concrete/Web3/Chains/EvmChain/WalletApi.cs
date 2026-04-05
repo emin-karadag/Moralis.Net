@@ -34,5 +34,40 @@ namespace Moralis.Net.Business.Concrete.Web3.Chains.EvmChain
                 return new ErrorDataResult<ChainActivityModel?>(ex.Message);
             }
         }
+
+        public async Task<IDataResult<NetWorthModel?>> GetWalletNetWorthAsync(string apiKey, string address, List<EvmChainEnum>? chains = null, bool? excludeSpam = null, bool? excludeUnverifiedContracts = null, int? maxTokenInactivity = null, decimal? minPairSideLiquidityUsd = null, CancellationToken ct = default)
+        {
+            try
+            {
+                var queryStr = "";
+                if (chains?.Count > 0)
+                {
+                    queryStr += $"chains={string.Join("&chains=", chains.Select(chain => chain.GetDisplayName()))}";
+                }
+
+                if (excludeSpam.HasValue)
+                    queryStr += $"{(string.IsNullOrEmpty(queryStr) ? "" : "&")}exclude_spam={excludeSpam.Value.ToString().ToLower()}";
+
+                if (excludeUnverifiedContracts.HasValue)
+                    queryStr += $"{(string.IsNullOrEmpty(queryStr) ? "" : "&")}exclude_unverified_contracts={excludeUnverifiedContracts.Value.ToString().ToLower()}";
+
+                if (maxTokenInactivity.HasValue)
+                    queryStr += $"{(string.IsNullOrEmpty(queryStr) ? "" : "&")}max_token_inactivity={maxTokenInactivity.Value}";
+
+                if (minPairSideLiquidityUsd.HasValue)
+                    queryStr += $"{(string.IsNullOrEmpty(queryStr) ? "" : "&")}min_pair_side_liquidity_usd={minPairSideLiquidityUsd.Value.ToString(System.Globalization.CultureInfo.InvariantCulture)}";
+
+                var url = $"/wallets/{address}/net-worth";
+                if (!string.IsNullOrEmpty(queryStr))
+                    url += $"?{queryStr}";
+
+                var result = await _requestService.SendRequestAsync<NetWorthModel?>(url, apiKey, null, ct: ct);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                return new ErrorDataResult<NetWorthModel?>(ex.Message);
+            }
+        }
     }
 }
