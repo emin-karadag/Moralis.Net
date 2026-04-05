@@ -1,4 +1,3 @@
-using Microsoft.Extensions.DependencyInjection;
 using Moralis.Net.Business.Abstract;
 using Moralis.Net.Business.Abstract.Web3;
 using Moralis.Net.Business.Abstract.Web3.Chains.EvmChain;
@@ -22,7 +21,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddTransient<ITokenApi, TokenApi>();
             services.AddTransient<IBalanceApi, BalanceApi>();
             services.AddTransient<ITransactionApi, TransactionApi>();
-            
+
             // Managers
             services.AddTransient<IEvmChain, EvmChain>();
             services.AddTransient<IWeb3Api, Web3Api>();
