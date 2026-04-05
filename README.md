@@ -10,7 +10,7 @@ Moralis'in herkese açık [API dokümanı](https://docs.moralis.io/) referans al
     MIT License
 
 ## Özellikleri
-- NuGet aracılığıyla yükleyebilme. ([Moralis.Net](https://www.nuget.org/packages/Moralis.Net/1.0.7))
+- NuGet aracılığıyla yükleyebilme. ([Moralis.Net](https://www.nuget.org/packages/Moralis.Net/1.0.8))
 - .NET 8 desteği. (Linux/MacOS uyumluluğu)
 - RestAPI, [Moralis resmi dokümanının](https://docs.moralis.io/) büyük çoğunluğunu destekler.
 	- Aktif olarak yeni özellikler eklenmeye devam edilecek.
@@ -20,16 +20,16 @@ API uç noktalarını kullanabilmek için Moralis hesabı oluşturmanız gerekme
 > Eğer hesabınız yok ise [buraya tıklayarak](https://admin.moralis.io/register) Moralis'e kaydolabilirsiniz.
 
 ## Kurulum
-Bu kütüphane NuGet'te mevcuttur, indirmek için çekinmeyin. ([https://www.nuget.org/packages/Moralis.Net/1.0.7](https://www.nuget.org/packages/Moralis.Net/1.0.7 "[https://www.nuget.org/packages/Moralis.Net/1.0.7](https://www.nuget.org/packages/Moralis.Net/1.0.0)"))
+Bu kütüphane NuGet'te mevcuttur, indirmek için çekinmeyin. ([https://www.nuget.org/packages/Moralis.Net/1.0.8](https://www.nuget.org/packages/Moralis.Net/1.0.8 "[https://www.nuget.org/packages/Moralis.Net/1.0.8](https://www.nuget.org/packages/Moralis.Net/1.0.0)"))
 
 **NuGet PM**
 ```
-Install-Package Moralis.Net -Version 1.0.7
+Install-Package Moralis.Net -Version 1.0.8
 ```
 
 **dotnet cli**
 ```
-dotnet add package Moralis.Net --version 1.0.7
+dotnet add package Moralis.Net --version 1.0.8
 ```
 <!--
 ## Yol Haritası
@@ -183,6 +183,20 @@ var result = await _moralisService.Web3Api.EvmChain.NftApi.GetNftCollectionsByWa
 if (result.Success)
 {
     // ...
+}
+```
+
+------------
+
+**9. Bir cüzdanın Net Değerini (Net Worth) USD cinsinden hesaplama:**
+```csharp
+var apiKey = "xx_moralis_api_key_xx";
+var address = "0xdc54a239B3be06E63b0DecA16c373d4480820498";
+var chains = new List<EvmChainEnum> { EvmChainEnum.ETHEREUM, EvmChainEnum.BSC, EvmChainEnum.POLYGON };
+var result = await _moralisService.Web3Api.EvmChain.WalletApi.GetWalletNetWorthAsync(apiKey, address, chains, excludeSpam: true, ct: stoppingToken);
+if (result.Success)
+{
+    Console.WriteLine($"Total Net Worth: {result.Data.TotalNetworthUsd} USD");
 }
 ```
 

@@ -396,4 +396,4 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
-/Moralis.Net.Test/Moralis.Net.Test.csproj
+/Moralis.Net.Test/*
