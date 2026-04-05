@@ -1,9 +1,18 @@
-﻿using Moralis.Net.Business.Abstract.Web3.Chains.EvmChain;
+using Moralis.Net.Business.Abstract.Web3.Chains.EvmChain;
 
 namespace Moralis.Net.Business.Concrete.Web3.Chains.EvmChain
 {
     public class EvmChain : IEvmChain
     {
+        public EvmChain(INftApi nftApi, IWalletApi walletApi, ITokenApi tokenApi, IBalanceApi balanceApi, ITransactionApi transactionApi)
+        {
+            NftApi = nftApi;
+            WalletApi = walletApi;
+            TokenApi = tokenApi;
+            BalanceApi = balanceApi;
+            TransactionApi = transactionApi;
+        }
+
         public EvmChain()
         {
             //MarketApi = new MarketApi();

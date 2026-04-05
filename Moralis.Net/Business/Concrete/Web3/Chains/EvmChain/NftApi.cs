@@ -1,4 +1,4 @@
-﻿using Moralis.Net.Business.Abstract.Web3.Chains.EvmChain;
+using Moralis.Net.Business.Abstract.Web3.Chains.EvmChain;
 using Moralis.Net.Core.Results.Abstract;
 using Moralis.Net.Core.Results.Concrete;
 using Moralis.Net.Core.Utilities;
@@ -9,6 +9,17 @@ namespace Moralis.Net.Business.Concrete.Web3.Chains.EvmChain
 {
     public class NftApi : INftApi
     {
+        private readonly IRequestService _requestService;
+
+        public NftApi(IRequestService requestService)
+        {
+            _requestService = requestService;
+        }
+
+        public NftApi()
+        {
+            _requestService = new RequestService();
+        }
         public async Task<IDataResult<WalletNftModel?>> GetNftsByWalletAsync(string apiKey, string address, EvmChainEnum chain = EvmChainEnum.ETHEREUM, List<string>? tokenAddresses = null, int? limit = null, string? cursor = null, FormatEnum format = FormatEnum.DECIMAL, bool? normalizeMetadata = null, bool? mediaItems = null, bool? excludeSpam = null, CancellationToken ct = default)
         {
             try
@@ -34,7 +45,7 @@ namespace Moralis.Net.Business.Concrete.Web3.Chains.EvmChain
                 if (excludeSpam.HasValue)
                     queryStr += $"&exclude_spam={excludeSpam}";
 
-                var result = await RequestHelper.SendRequestAsync<WalletNftModel?>($"/{address}/nft?{queryStr}", apiKey, null, ct: ct);
+                var result = await _requestService.SendRequestAsync<WalletNftModel?>($"/{address}/nft?{queryStr}", apiKey, null, ct: ct);
                 return result;
             }
             catch (Exception ex)
@@ -71,7 +82,7 @@ namespace Moralis.Net.Business.Concrete.Web3.Chains.EvmChain
                 if (mediaItems.HasValue)
                     parameters.Add("media_items", mediaItems.Value.ToString());
 
-                var result = await RequestHelper.SendRequestAsync<ContractNftModel?>($"/nft/{address}", apiKey, parameters, ct: ct);
+                var result = await _requestService.SendRequestAsync<ContractNftModel?>($"/nft/{address}", apiKey, parameters, ct: ct);
                 return result;
             }
             catch (Exception ex)
@@ -98,7 +109,7 @@ namespace Moralis.Net.Business.Concrete.Web3.Chains.EvmChain
                 if (excludeSpam.HasValue)
                     parameters.Add("exclude_spam", excludeSpam.Value.ToString());
 
-                var result = await RequestHelper.SendRequestAsync<WalletNftCollectionsModel?>($"/{address}/nft/collections", apiKey, parameters, ct: ct);
+                var result = await _requestService.SendRequestAsync<WalletNftCollectionsModel?>($"/{address}/nft/collections", apiKey, parameters, ct: ct);
                 return result;
             }
             catch (Exception ex)
@@ -119,7 +130,7 @@ namespace Moralis.Net.Business.Concrete.Web3.Chains.EvmChain
                 if (mode != ModeEnum.NONE)
                     queryStr += $"&mode={mode.GetDisplayName()}";
 
-                var result = await RequestHelper.SendRequestAsync<ResyncNftMetadataModel?>($"/nft/{address}/{tokenId}/metadata/resync?{queryStr}", apiKey, null, ct: ct);
+                var result = await _requestService.SendRequestAsync<ResyncNftMetadataModel?>($"/nft/{address}/{tokenId}/metadata/resync?{queryStr}", apiKey, null, ct: ct);
                 return result;
             }
             catch (Exception ex)
@@ -146,7 +157,7 @@ namespace Moralis.Net.Business.Concrete.Web3.Chains.EvmChain
                 if (mediaItems.HasValue)
                     queryStr += $"&media_items={mediaItems.Value}";
 
-                var result = await RequestHelper.SendRequestAsync<NftOwnersModel>($"/nft/{address}/owners?{queryStr}", apiKey, null, ct: ct);
+                var result = await _requestService.SendRequestAsync<NftOwnersModel>($"/nft/{address}/owners?{queryStr}", apiKey, null, ct: ct);
                 return result;
             }
             catch (Exception ex)
@@ -173,7 +184,7 @@ namespace Moralis.Net.Business.Concrete.Web3.Chains.EvmChain
                 if (mediaItems.HasValue)
                     queryStr += $"&media_items={mediaItems.Value}";
 
-                var result = await RequestHelper.SendRequestAsync<NftOwnersModel>($"/nft/{address}/{tokenId}/owners?{queryStr}", apiKey, null, ct: ct);
+                var result = await _requestService.SendRequestAsync<NftOwnersModel>($"/nft/{address}/{tokenId}/owners?{queryStr}", apiKey, null, ct: ct);
                 return result;
             }
             catch (Exception ex)

@@ -1,4 +1,4 @@
-﻿using Moralis.Net.Business.Abstract.Web3.Chains.EvmChain;
+using Moralis.Net.Business.Abstract.Web3.Chains.EvmChain;
 using Moralis.Net.Core.Results.Abstract;
 using Moralis.Net.Core.Results.Concrete;
 using Moralis.Net.Core.Utilities;
@@ -9,6 +9,17 @@ namespace Moralis.Net.Business.Concrete.Web3.Chains.EvmChain
 {
     public class TransactionApi : ITransactionApi
     {
+        private readonly IRequestService _requestService;
+
+        public TransactionApi(IRequestService requestService)
+        {
+            _requestService = requestService;
+        }
+
+        public TransactionApi()
+        {
+            _requestService = new RequestService();
+        }
         public async Task<IDataResult<TransactionByHashModel?>> GetTransactionByHashAsync(string apiKey, string transactionHash, EvmChainEnum chain = EvmChainEnum.ETHEREUM, bool includeInternalTransactions = false, CancellationToken ct = default)
         {
             try
@@ -21,7 +32,7 @@ namespace Moralis.Net.Business.Concrete.Web3.Chains.EvmChain
                 if (includeInternalTransactions)
                     parameters.Add("include", "internal_transactions");
 
-                var result = await RequestHelper.SendRequestAsync<TransactionByHashModel?>($"/transaction/{transactionHash}", apiKey, parameters, ct: ct);
+                var result = await _requestService.SendRequestAsync<TransactionByHashModel?>($"/transaction/{transactionHash}", apiKey, parameters, ct: ct);
                 return result;
             }
             catch (Exception ex)
@@ -60,7 +71,7 @@ namespace Moralis.Net.Business.Concrete.Web3.Chains.EvmChain
                 if (limit.HasValue)
                     parameters.Add("limit", limit.Value.ToString());
 
-                var result = await RequestHelper.SendRequestAsync<TransactionsByWalletModel?>($"/{address}", apiKey, parameters, ct: ct);
+                var result = await _requestService.SendRequestAsync<TransactionsByWalletModel?>($"/{address}", apiKey, parameters, ct: ct);
                 return result;
             }
             catch (Exception ex)

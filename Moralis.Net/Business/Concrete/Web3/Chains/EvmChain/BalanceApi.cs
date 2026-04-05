@@ -1,4 +1,4 @@
-﻿using Moralis.Net.Business.Abstract.Web3.Chains.EvmChain;
+using Moralis.Net.Business.Abstract.Web3.Chains.EvmChain;
 using Moralis.Net.Core.Results.Abstract;
 using Moralis.Net.Core.Results.Concrete;
 using Moralis.Net.Core.Utilities;
@@ -9,6 +9,17 @@ namespace Moralis.Net.Business.Concrete.Web3.Chains.EvmChain
 {
     public class BalanceApi : IBalanceApi
     {
+        private readonly IRequestService _requestService;
+
+        public BalanceApi(IRequestService requestService)
+        {
+            _requestService = requestService;
+        }
+
+        public BalanceApi()
+        {
+            _requestService = new RequestService();
+        }
         public async Task<IDataResult<NativeBalanceModel?>> GetNativeBalanceByWalletAsync(string apiKey, string address, EvmChainEnum chain = EvmChainEnum.ETHEREUM, long? toBlock = null, CancellationToken ct = default)
         {
             try
@@ -21,7 +32,7 @@ namespace Moralis.Net.Business.Concrete.Web3.Chains.EvmChain
                 if (toBlock.HasValue)
                     parameters.Add("to_block", toBlock.Value.ToString());
 
-                var result = await RequestHelper.SendRequestAsync<NativeBalanceModel>($"/{address}/balance", apiKey, parameters, ct: ct);
+                var result = await _requestService.SendRequestAsync<NativeBalanceModel>($"/{address}/balance", apiKey, parameters, ct: ct);
                 return result;
             }
             catch (Exception ex)
@@ -40,7 +51,7 @@ namespace Moralis.Net.Business.Concrete.Web3.Chains.EvmChain
 
                 queryStr += $"&wallet_addresses={string.Join("&wallet_addresses=", walletAddresses.Select(address => address))}";
 
-                var result = await RequestHelper.SendRequestAsync<List<NativeBalanceMultiWalletModel>?>($"/wallets/balances?{queryStr}", apiKey, null, ct: ct);
+                var result = await _requestService.SendRequestAsync<List<NativeBalanceMultiWalletModel>?>($"/wallets/balances?{queryStr}", apiKey, null, ct: ct);
                 return result;
             }
             catch (Exception ex)

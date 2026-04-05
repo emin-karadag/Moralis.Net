@@ -1,4 +1,4 @@
-﻿using Moralis.Net.Business.Abstract.Web3;
+using Moralis.Net.Business.Abstract.Web3;
 using Moralis.Net.Business.Abstract.Web3.Chains.EvmChain;
 using Moralis.Net.Business.Concrete.Web3.Chains.EvmChain;
 
@@ -6,6 +6,11 @@ namespace Moralis.Net.Business.Concrete.Web3
 {
     public class Web3Api : IWeb3Api
     {
+        public Web3Api(IEvmChain evmChain)
+        {
+            EvmChain = evmChain;
+        }
+
         public Web3Api()
         {
             EvmChain = new EvmChain();

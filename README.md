@@ -48,21 +48,34 @@ dotnet add package Moralis.Net --version 1.0.7
 ## Örnek Kullanım
 
 **Bağımlılık Enjeksiyonu (Dependency Injection):**
+ASP.NET Core veya Worker Service vb. modern .NET projelerinde `AddMoralisNet` uzantısı ile (DI container üzerinden) tüm bileşenleri ve performanslı `HttpClient` yapılandırmasını otomatik olarak entegre edebilirsiniz:
 ```csharp
-using Moralis.Net.Business.Abstract;
-using Moralis.Net.Business.Concrete;
+using Microsoft.Extensions.DependencyInjection;
 
-services.AddSingleton<IMoralisService, MoralisManager>();
+// Servis kayıt aşamasında:
+builder.Services.AddMoralisNet();
 ```
 
-**Constructor'da tanımalama:**
+**Klasik Kullanım (Sınıf İçi veya Console App):**
+```csharp
+using Moralis.Net.Business.Concrete;
+
+// Dependency Injection kullanmıyorsanız direkt instance oluşturabilirsiniz:
+var moralisManager = new MoralisManager();
+```
+
+**Constructor'da tanımlama (Dependency Injection):**
 ```csharp
 using Moralis.Net.Business.Abstract;
 
-private readonly IMoralisService _moralisService;
-public Test(IMoralisService moralisService)
+public class Test
 {
-   _moralisService = moralisService;
+    private readonly IMoralisService _moralisService;
+    
+    public Test(IMoralisService moralisService)
+    {
+       _moralisService = moralisService;
+    }
 }
 ```
 

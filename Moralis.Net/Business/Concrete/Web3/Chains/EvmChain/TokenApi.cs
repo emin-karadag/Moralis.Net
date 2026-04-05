@@ -1,4 +1,4 @@
-﻿using Moralis.Net.Business.Abstract.Web3.Chains.EvmChain;
+using Moralis.Net.Business.Abstract.Web3.Chains.EvmChain;
 using Moralis.Net.Core.Results.Abstract;
 using Moralis.Net.Core.Results.Concrete;
 using Moralis.Net.Core.Utilities;
@@ -9,6 +9,17 @@ namespace Moralis.Net.Business.Concrete.Web3.Chains.EvmChain
 {
     public class TokenApi : ITokenApi
     {
+        private readonly IRequestService _requestService;
+
+        public TokenApi(IRequestService requestService)
+        {
+            _requestService = requestService;
+        }
+
+        public TokenApi()
+        {
+            _requestService = new RequestService();
+        }
         public async Task<IDataResult<TokenPriceModel?>> GetTokenPriceAsync(string apiKey, string address, EvmChainEnum chain = EvmChainEnum.ETHEREUM, bool includePercentChange = true, ExchangeEnum exchange = ExchangeEnum.NONE, int? toBlock = null, CancellationToken ct = default)
         {
             try
@@ -27,7 +38,7 @@ namespace Moralis.Net.Business.Concrete.Web3.Chains.EvmChain
                 if (toBlock.HasValue)
                     parameters.Add("to_block", toBlock.Value.ToString());
 
-                var result = await RequestHelper.SendRequestAsync<TokenPriceModel?>($"/erc20/{address}/price", apiKey, parameters, ct: ct);
+                var result = await _requestService.SendRequestAsync<TokenPriceModel?>($"/erc20/{address}/price", apiKey, parameters, ct: ct);
                 return result;
             }
             catch (Exception ex)
@@ -49,7 +60,7 @@ namespace Moralis.Net.Business.Concrete.Web3.Chains.EvmChain
                     foreach (var tokenAddress in tokenAddresses)
                         queryStr += $"&token_addresses={tokenAddress}";
 
-                var result = await RequestHelper.SendRequestAsync<List<TokenBalanceByWalletModel?>?>($"/{address}/erc20?{queryStr}", apiKey, null, ct: ct);
+                var result = await _requestService.SendRequestAsync<List<TokenBalanceByWalletModel?>?>($"/{address}/erc20?{queryStr}", apiKey, null, ct: ct);
                 return result;
             }
             catch (Exception ex)

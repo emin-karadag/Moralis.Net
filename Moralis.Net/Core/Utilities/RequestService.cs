@@ -1,27 +1,45 @@
-﻿using Moralis.Net.Core.Results.Abstract;
+using Moralis.Net.Core.Results.Abstract;
 using Moralis.Net.Core.Results.Concrete;
 using Moralis.Net.Models.Common;
+using System;
+using System.Collections.Generic;
 using System.Net;
+using System.Net.Http;
 using System.Net.Http.Json;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Moralis.Net.Core.Utilities
 {
-    public static class RequestHelper
+    public class RequestService : IRequestService
     {
-        public static async Task<IDataResult<T?>> SendRequestAsync<T>(string url, string apiKey, Dictionary<string, string>? parameters = null, string version = "", CancellationToken ct = default)
+        private static readonly HttpClient _staticHttpClient = new HttpClient();
+        private readonly HttpClient _httpClient;
+
+        public RequestService(HttpClient httpClient)
+        {
+            _httpClient = httpClient;
+        }
+
+        public RequestService()
+        {
+            _httpClient = _staticHttpClient;
+        }
+
+        public async Task<IDataResult<T?>> SendRequestAsync<T>(string url, string apiKey, Dictionary<string, string>? parameters = null, string version = "", CancellationToken ct = default)
         {
             try
             {
-                using var httpClient = new HttpClient();
-                httpClient.DefaultRequestHeaders.Add("X-Api-Key", apiKey);
-
                 var queryString = MoralisHelper.CreateQueryString(parameters);
                 var requestUri = MoralisHelper.GetRequestUrl(url, version);
                 var uriBuilder = new UriBuilder(requestUri);
                 if (parameters?.Count > 0)
                     uriBuilder.Query = queryString;
 
-                var response = await httpClient.GetAsync(uriBuilder.Uri, ct);
+                using var request = new HttpRequestMessage(HttpMethod.Get, uriBuilder.Uri);
+                request.Headers.Add("X-Api-Key", apiKey);
+
+                var response = await _httpClient.SendAsync(request, ct);
                 if (response.StatusCode == HttpStatusCode.OK)
                 {
 #if DEBUG
